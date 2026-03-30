@@ -1,3 +1,41 @@
+import os
+import sys
+
+# 禁用Python字节码缓存 - 在解释器初始化早期设置
+# 注意：此设置仅对当前程序有效
+# 要完全禁用缓存，请使用以下任一方法：
+# 1. 运行程序时使用: python -B main.py
+# 2. 设置系统环境变量: PYTHONDONTWRITEBYTECODE=1
+os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
+sys.dont_write_bytecode = True
+
+>>>>>>> c8911da (禁用 Python 字节码缓存)
+import tkinter as tk
+import os
+import sys
+
+# 禁用 Python 字节码缓存 - 在解释器初始化早期设置
+# 注意：此设置仅对当前程序有效
+# 要完全禁用缓存，请使用以下任一方法：
+# 1. 运行程序时使用：python -B main.py
+# 2. 设置系统环境变量：PYTHONDONTWRITEBYTECODE=1
+os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
+sys.dont_write_bytecode = True
+
+import tkinter as tk
+=======
+import os
+import sys
+
+# 禁用Python字节码缓存 - 在解释器初始化早期设置
+# 注意：此设置仅对当前程序有效
+# 要完全禁用缓存，请使用以下任一方法：
+# 1. 运行程序时使用: python -B main.py
+# 2. 设置系统环境变量: PYTHONDONTWRITEBYTECODE=1
+os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
+sys.dont_write_bytecode = True
+
+>>>>>>> c8911da (禁用Python字节码缓存)
 import tkinter as tk
 from ui import FormulaRecognizerUI
 from api_client import FormulaAPIClient
