@@ -6,27 +6,23 @@
 - `ui.py` - 用户界面设置和布局管理  
 - `api_client.py` - API调用和公式识别逻辑
 - `image_handler.py` - 图片处理和显示功能
-- `config_loader.py` - 配置文件加载模块
-- `app_info.txt` - API配置文件（App ID和App Secret）
 - `requirements.txt` - 依赖包列表
 
 ## 使用方法
 
 1. 安装依赖：
+
    ```bash
    pip install -r requirements.txt
    ```
 
-2. 创建 `app_info.txt` 文件，格式：
-   ```
-   your_app_id
-   your_app_secret
-   ```
+2. 运行程序：
 
-3. 运行程序：
    ```bash
    python main.py
    ```
+
+3. 在程序界面中输入您的App ID和App Secret
 
 ## 功能特点
 

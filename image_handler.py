@@ -40,7 +40,7 @@ class ImageHandler:
         """在下方区域显示识别结果"""
         try:
             canvas.delete("all")
-            canvas.create_text(200, 150, text=latex_formula, fill="black", font=("Consolas", 13), width=380)
+            canvas.create_text(200, 150, text=latex_formula, fill="black", font=("SimSun", 13), width=380)
         except Exception as e:
             canvas.delete("all")
             canvas.create_text(200, 150, text=f"显示失败: {str(e)}", fill="red", font=("SimSun", 13))

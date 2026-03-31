@@ -55,13 +55,13 @@ class FormulaRecognizerUI:
         tk.Label(config_frame, text="App ID:", font=("SimSun", 13)).grid(
             row=0, column=0, sticky=tk.W, pady=2
         )
-        self.app_id_entry = tk.Entry(config_frame)
+        self.app_id_entry = tk.Entry(config_frame, font=("SimSun", 13))
         self.app_id_entry.grid(row=0, column=1, pady=2, sticky=tk.EW)
 
         tk.Label(config_frame, text="App Secret:", font=("SimSun", 13)).grid(
             row=1, column=0, sticky=tk.W, pady=2
         )
-        self.app_secret_entry = tk.Entry(config_frame)
+        self.app_secret_entry = tk.Entry(config_frame, font=("SimSun", 13))
         self.app_secret_entry.grid(row=1, column=1, pady=2, sticky=tk.EW)
 
         # API端口选择

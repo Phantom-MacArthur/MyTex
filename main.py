@@ -9,38 +9,10 @@ import sys
 os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
 sys.dont_write_bytecode = True
 
->>>>>>> c8911da (禁用 Python 字节码缓存)
-import tkinter as tk
-import os
-import sys
-
-# 禁用 Python 字节码缓存 - 在解释器初始化早期设置
-# 注意：此设置仅对当前程序有效
-# 要完全禁用缓存，请使用以下任一方法：
-# 1. 运行程序时使用：python -B main.py
-# 2. 设置系统环境变量：PYTHONDONTWRITEBYTECODE=1
-os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
-sys.dont_write_bytecode = True
-
-import tkinter as tk
-=======
-import os
-import sys
-
-# 禁用Python字节码缓存 - 在解释器初始化早期设置
-# 注意：此设置仅对当前程序有效
-# 要完全禁用缓存，请使用以下任一方法：
-# 1. 运行程序时使用: python -B main.py
-# 2. 设置系统环境变量: PYTHONDONTWRITEBYTECODE=1
-os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
-sys.dont_write_bytecode = True
-
->>>>>>> c8911da (禁用Python字节码缓存)
 import tkinter as tk
 from ui import FormulaRecognizerUI
 from api_client import FormulaAPIClient
 from image_handler import ImageHandler
-from config_loader import ConfigLoader
 
 
 class FormulaRecognizer:
@@ -50,7 +22,6 @@ class FormulaRecognizer:
         self.root.geometry("1000x700")
         
         # 初始化各个模块
-        self.config_loader = ConfigLoader()
         self.api_client = FormulaAPIClient()
         self.image_handler = ImageHandler(self.root)
         self.ui = FormulaRecognizerUI(self.root, self)
@@ -59,17 +30,8 @@ class FormulaRecognizer:
         self.selected_image_path = None
         self.is_waiting_for_screenshot = False
         
-        # 加载配置
-        self.load_app_info()
-        
         # 绑定快捷键
         self.root.bind('<Control-v>', self.paste_image_from_clipboard)
-
-    def load_app_info(self):
-        """加载同目录下的app info文件"""
-        app_info = self.config_loader.load_app_info()
-        if app_info:
-            self.ui.set_app_config(app_info['app_id'], app_info['app_secret'])
 
     def select_image(self):
         """选择图片文件"""
@@ -103,7 +65,6 @@ class FormulaRecognizer:
         from PIL import ImageGrab
         import tempfile
         import os
-        from tkinter import messagebox
         
         # 重置截图等待标志
         self.is_waiting_for_screenshot = False
@@ -122,8 +83,10 @@ class FormulaRecognizer:
                 self.root.update()
                 self.auto_recognize_formula()
             else:
-                messagebox.showwarning("警告", "剪贴板中没有图片！")
+                # 根据项目规范，剪贴板无图片时静默返回，不弹窗警告
+                return
         except Exception as e:
+            from tkinter import messagebox
             messagebox.showerror("错误", f"从剪贴板读取图片失败: {str(e)}")
 
     def take_screenshot(self):
@@ -183,8 +146,6 @@ class FormulaRecognizer:
         app_secret = self.ui.get_app_secret()
 
         if not app_id or not app_secret:
-            from tkinter import messagebox
-            messagebox.showwarning("警告", "请先填写App ID和App Secret！")
             self.ui.clear_result_text()
             self.ui.show_config_prompt()
             return
@@ -224,22 +185,14 @@ class FormulaRecognizer:
 
 def main():
     """主函数"""
-    print("公式识别软件启动中...")
-    print("使用说明:")
-    print("1. 前往 https://simpletex.cn/user/center 开通开放平台功能")
-    print("2. 在应用列表中创建应用，获取App ID和App Secret")
-    print("3. 在软件界面中填入App ID和App Secret")
-    print("4. 选择包含公式的截图图片")
-    print("5. 软件会自动识别并复制LaTeX结果")
-    print()
-    # 强制刷新输出缓冲区
-    import sys
-    sys.stdout.flush()
-
+    # 根据项目规范，启动时严禁在控制台打印任何使用说明或状态信息
+    # 所有启动提示已在 GUI 界面中显示
+    
     try:
         app = FormulaRecognizer()
         app.run()
     except ImportError as e:
+        # 依赖错误仍然需要在控制台显示，因为此时 GUI 可能无法启动
         print(f"缺少必要的依赖包: {e}")
         print("请安装以下依赖:")
         print("pip install requests pillow tkinter")
